@@ -12,7 +12,7 @@
  * §6.2 那條「官方英文名恆為主名」在這裡的樣子就是「主名只有色碼」——
  * 不可以把 4 個膚色的中文標示升格成主名，那會讓 app 對其餘 76 色不可驗證。
  *
- * 用法：EnmyDetail.open(color, { sets })
+ * 用法：EnmyDetail.open(color, { sets, onFamilyClick })
  */
 (function (global) {
   'use strict';
@@ -70,6 +70,15 @@
     el.innerHTML = MARKUP;
     document.body.appendChild(el);
     inst = M.Modal.init(el, { preventScrolling: false });
+    // 委派綁在模組注入的容器上，**只綁一次**——呼叫端不要再對同一個選擇器綁第二個
+    // handler（faber-castell-color 就因為兩處各綁一次，點一下同時開新分頁又把本頁導走）。
+    el.addEventListener('click', function (e) {
+      var b = e.target.closest && e.target.closest('.fact-link[data-family]');
+      if (!b) return;
+      var fam = b.getAttribute('data-family');
+      inst.close();
+      if (currentOpts && currentOpts.onFamilyClick) currentOpts.onFamilyClick(fam);
+    });
     if (global.I18n && global.I18n.apply) global.I18n.apply(el);
   }
 
@@ -107,6 +116,18 @@
 
   function factRow(k, v) {
     return '<tr><td class="fk">' + esc(k) + '</td><td class="fv">' + esc(v) + '</td></tr>';
+  }
+
+  /**
+   * 值本身可點的事實列。用途：從明細直接跳到「同一個官方色系的其他色」。
+   * 差異行為交給呼叫端的 callback（§4.1 的第三種模組）；
+   * **沒有 callback 就退回純文字**，不留一顆按了不動的死鍵（§5.13）。
+   */
+  function factRowLink(k, v, data, hint) {
+    if (!currentOpts || !currentOpts.onFamilyClick) return factRow(k, v);
+    return '<tr><td class="fk">' + esc(k) + '</td><td class="fv">'
+      + '<button type="button" class="fact-link" data-family="' + esc(data) + '"'
+      + ' title="' + esc(hint) + '">' + esc(v) + '</button></td></tr>';
   }
 
   function open(color, opts) {
@@ -157,7 +178,8 @@
       rows += factRow(t('detail.prefix', '色碼字首'), parts.prefix);
       rows += factRow(t('detail.num', '號碼'), parts.num);
     }
-    rows += factRow(t('detail.family', '官方色系'), fam ? fam.name : color.family);
+    rows += factRowLink(t('detail.family', '官方色系'), fam ? fam.name : color.family,
+      color.family, t('detail.familyJump', '只看這個官方色系'));
     rows += factRow(t('detail.verify', '來源'), color.verify === 'cross-validated'
       ? t('verify.cross', '兩份官方色表互證') : t('verify.approx', '單一官方色表'));
     parse.innerHTML = '<table class="facts-table"><tbody>' + rows + '</tbody></table>' +

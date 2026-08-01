@@ -44,6 +44,7 @@ I18n.register('en', {
   'detail.prefix': 'Code prefix',
   'detail.num': 'Number',
   'detail.family': 'Official family',
+  'detail.familyJump': 'Show only this family',
   'detail.verify': 'Source',
   'detail.prefixNote': 'The prefix is part of the code’s own structure; the brand has never published names for the prefixes, so this page does not invent any.',
   'detail.noPrefix': 'Black and white have no prefix — the codes are simply 0 and 1.',

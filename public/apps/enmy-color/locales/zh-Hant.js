@@ -43,6 +43,7 @@ I18n.register('zh-Hant', {
   'detail.prefix': '色碼字首',
   'detail.num': '號碼',
   'detail.family': '官方色系',
+  'detail.familyJump': '只看這個官方色系',
   'detail.verify': '來源',
   'detail.prefixNote': '字首是色碼自身的結構，品牌未公布其名稱——本頁不替它命名。',
   'detail.noPrefix': '黑與白沒有字首，色號就是 0 與 1。',

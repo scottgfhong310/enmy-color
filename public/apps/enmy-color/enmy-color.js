@@ -72,6 +72,23 @@
     return sep;
   }
 
+  /**
+   * 切到某個官方色系並重畫。chip 與明細的「官方色系」那格共用這一支——
+   * 兩處各寫一次遲早會漂（例如只有一邊記得寫 localStorage）。
+   */
+  function pickFamily(code) {
+    if (!FAMS.some(function (f) { return f.code === code; })) return false;
+    state.family = code;
+    state.layout = 'rows';
+    state.q = '';
+    var $s = document.getElementById('search');
+    if ($s) $s.value = '';
+    localStorage.setItem(KEY_FAM, state.family);
+    localStorage.setItem(KEY_LAYOUT, state.layout);
+    render();
+    return true;
+  }
+
   function renderFamilies() {
     $fams.innerHTML = '';
 
@@ -96,13 +113,7 @@
       $fams.appendChild(chipNode(
         f.name, f.name, n,
         state.layout !== 'flat' && f.code === state.family,
-        function () {
-          state.family = f.code;
-          state.layout = 'rows';
-          localStorage.setItem(KEY_FAM, f.code);
-          localStorage.setItem(KEY_LAYOUT, state.layout);
-          render();
-        }
+        function () { pickFamily(f.code); }
       ));
     });
   }
@@ -214,7 +225,11 @@
   }
 
   function openDetail(c) {
-    window.EnmyDetail.open(c, { sets: SETS });
+    window.EnmyDetail.open(c, {
+      sets: SETS,
+      // 點明細裡的官方色系 → 本頁就地切到那個色系（不跳頁、不開新分頁）
+      onFamilyClick: function (fam) { pickFamily(fam); }
+    });
   }
 
   // ---- 側鍵 ---------------------------------------------------------------

@@ -43,6 +43,7 @@ I18n.register('ja', {
   'detail.prefix': '色番号の接頭辞',
   'detail.num': '番号',
   'detail.family': '公式カラーグループ',
+  'detail.familyJump': 'この公式カラーグループだけを表示',
   'detail.verify': '出典',
   'detail.prefixNote': '接頭辞は色番号自体の構造です。メーカーは名称を公表していないため、本ページでは名前を付けません。',
   'detail.noPrefix': '黒と白に接頭辞はなく、色番号はそのまま 0 と 1 です。',
