@@ -32,10 +32,10 @@ I18n.register('en', {
   'nearest.placeholder': '#RRGGBB',
   'nearest.paste': 'Paste from clipboard',
 
-  'band.very': 'Very close',
-  'band.close': 'Close',
-  'band.noticeable': 'Noticeable',
-  'band.far': 'Far',
+  'band.very': 'excellent match',
+  'band.close': 'close',
+  'band.noticeable': 'noticeable',
+  'band.far': 'far',
 
   'detail.close': 'Close',
   'detail.parse': 'Code breakdown',
@@ -64,8 +64,8 @@ I18n.register('en', {
   'toast.copied': 'Copied',
   'toast.copyFail': 'Copy failed (requires localhost or HTTPS)',
   'toast.pasted': 'Pasted: {v}',
-  'toast.pasteFail': 'Cannot read the clipboard (not permitted) — paste into the field with ⌘V',
-  'toast.pasteNoColor': 'No recognisable colour in the clipboard',
+  'toast.pasteFail': 'Can\'t read the clipboard (permission denied) — paste into the field with ⌘V instead',
+  'toast.pasteNoColor': 'No colour found in the clipboard',
   'toast.lang': 'Switched to {name}',
   'toast.downloaded': 'Downloaded: {n}'
 }, 'English');

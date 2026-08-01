@@ -31,10 +31,10 @@ I18n.register('ja', {
   'nearest.placeholder': '#RRGGBB',
   'nearest.paste': 'クリップボードから貼り付け',
 
-  'band.very': 'ほぼ同じ',
+  'band.very': 'ごく近い',
   'band.close': '近い',
-  'band.noticeable': '識別できる差',
-  'band.far': '差が大きい',
+  'band.noticeable': '差が分かる',
+  'band.far': '遠い',
 
   'detail.close': '閉じる',
   'detail.parse': '色番号の分解',
@@ -62,9 +62,9 @@ I18n.register('ja', {
 
   'toast.copied': 'コピーしました',
   'toast.copyFail': 'コピーに失敗（localhost または HTTPS が必要）',
-  'toast.pasted': 'コピーしました：{v}',
-  'toast.pasteFail': 'クリップボードを読み取れません（未許可）——欄で ⌘V を使ってください',
-  'toast.pasteNoColor': 'クリップボードに認識できる色がありません',
+  'toast.pasted': '貼り付けました：{v}',
+  'toast.pasteFail': 'クリップボードを読み取れません（許可されていません）——フィールドに ⌘V で直接貼り付けてください',
+  'toast.pasteNoColor': 'クリップボードに色が見つかりません',
   'toast.lang': '{name} に切り替えました',
   'toast.downloaded': 'ダウンロード：{n}'
 }, '日本語');
