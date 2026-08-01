@@ -135,9 +135,9 @@
     sw.style.color = L.pickTextColor(c);
     sw.textContent = m.code;
     // 沒有色名可放。這一行改放「隨盒色卡的中文標示（只有 4 色有）」或官方色系名，
-    // **不留空**——空白會被讀成資料掉了。
-    var fam = (global.ENMY_FAMILIES || []).filter(function (f) { return f.code === m.family; })[0];
-    el.querySelector('.near-name').textContent = m.nameZh || (fam ? fam.name : '');
+    // **不留空**——空白會被讀成資料掉了。規則在 lib 的 displayName()（見該函式）。
+    el.querySelector('.near-name').textContent =
+      L.displayName(m, global.I18n && global.I18n.lang);
     el.querySelector('.near-hex').textContent = m.hex;
     el.querySelector('.near-de').textContent =
       'ΔE ' + m.deltaE.toFixed(2) + ' · ' + t('band.' + m.band, BAND_FB[m.band]);

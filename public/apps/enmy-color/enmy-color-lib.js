@@ -25,6 +25,7 @@
  *   sortColors(colors, mode, families) → 'code'|'hue'|'lightness'|'hex'|'family'
  *   codeParts(code) → { prefix, num }        純由色號推導
  *   prefixRows(colors, familyCode) → [{ prefix, colors[] }]  一列一個字首（本 app 的版面）
+ *   displayName(color, lang) → 名字那一格要放什麼（恆非空；ENMY 無色名，見該函式）
  *   hexToRgb · rgbToHsl · rgbToLab · deltaE(ΔE00) · deltaEBand
  *   nearestENMY({r,g,b}, { n, set, colors, sets }) → [{ code, hex, cssVar, deltaE, band }]
  *   relLuminance · contrastRatio · pickTextColor
@@ -246,6 +247,25 @@
     return out;
   }
 
+  /**
+   * 「名字那一格要放什麼」——ENMY 沒有色名，但**留白會被讀成資料掉了**，
+   * 而事實是原廠不發佈色名。所以這支恆回一個非空字串：
+   *   · zh-Hant 且該色有隨盒色卡的中文標示（僅 4 個膚色）→ 用那個標示
+   *   · 其餘 → 官方色系名（`Red & Pink`…，這是品牌自己發佈的分類）
+   *
+   * **這不是色名，是替代標示**——所以呼叫端不可拿它當可驗證的識別憑據
+   * （§6.2：主識別一律是色碼）。
+   *
+   * 放在 lib 而不是各控制器，是因為本檔會被複製進 color-palette／thangka-trace：
+   * 邏輯只寫一次，三份複製件才不會各自漂（家族踩過那個坑）。
+   */
+  function displayName(c, lang) {
+    if (!c) return '';
+    if (c.nameZh && String(lang || 'zh-Hant').indexOf('zh') === 0) return c.nameZh;
+    var fam = (global.ENMY_FAMILIES || []).filter(function (f) { return f.code === c.family; })[0];
+    return fam ? fam.name : (c.family || c.code);
+  }
+
   // ---- 套組 ↔ 顏色 --------------------------------------------------------
 
   function setIndex(sets) {
@@ -316,6 +336,7 @@
     sortColors: sortColors,
     codeParts: codeParts,
     prefixRows: prefixRows,
+    displayName: displayName,
     hexToRgb: hexToRgb,
     rgbToHsl: rgbToHsl,
     rgbToLab: rgbToLab,

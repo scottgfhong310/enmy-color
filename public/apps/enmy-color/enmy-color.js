@@ -172,10 +172,11 @@
     sw.style.background = c.hex;
     sw.style.color = L.pickTextColor(c);
     sw.textContent = c.code;
-    // 沒有色名可放。放官方色系名（或膚色的中文標示），**不留空**——
+    // 沒有色名可放。改放中文標示（僅 4 個膚色有）或官方色系名，**不留空**——
     // 空白會被讀成資料掉了，而這裡的事實是「原廠不發佈色名」。
-    var fam = FAMS.filter(function (f) { return f.code === c.family; })[0];
-    el.querySelector('.en-name').textContent = c.nameZh || (fam ? fam.name : '');
+    // 規則寫在 lib 的 displayName()，因為 lib 會被複製進 color-palette／thangka-trace，
+    // 三份複製件必須給出同一個答案。
+    el.querySelector('.en-name').textContent = L.displayName(c, window.I18n && I18n.lang);
     el.querySelector('.en-hex').textContent = c.hex;
     el.addEventListener('click', function () { openDetail(c); });
     return el;
