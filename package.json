@@ -1,0 +1,15 @@
+{
+  "name": "enmy-color",
+  "version": "1.0.0",
+  "description": "ENMY 色號 → CSS 對照的唯讀參考 WebApp：80 色壓克力麥克筆依官方色系與色碼字首瀏覽、最接近色比對、一鍵複製、.css 匯出，支援 light/dark 與三語。",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": ["enmy", "acrylic", "marker", "color", "colour", "css", "palette", "reference", "express", "materialize"],
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2",
+    "morgan": "^1.10.0"
+  }
+}
