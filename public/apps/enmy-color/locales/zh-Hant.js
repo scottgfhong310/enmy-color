@@ -16,6 +16,7 @@ I18n.register('zh-Hant', {
   'tool.download': '下載 enmy_colors.css',
   'tool.mode': '切換 light / dark',
   'tool.lang': '語言',
+  'tool.more': '更多工具',
 
   'rows.explain': '一列一個色碼字首，橫向依號碼；字首無官方名稱',
 

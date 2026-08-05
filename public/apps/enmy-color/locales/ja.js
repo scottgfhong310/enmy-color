@@ -16,6 +16,7 @@ I18n.register('ja', {
   'tool.download': 'enmy_colors.css をダウンロード',
   'tool.mode': 'ライト / ダーク切替',
   'tool.lang': '言語',
+  'tool.more': 'その他のツール',
 
   'rows.explain': '1 行に 1 つの接頭辞、横は番号順。接頭辞に公式名称はありません',
 

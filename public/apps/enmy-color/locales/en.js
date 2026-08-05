@@ -17,6 +17,7 @@ I18n.register('en', {
   'tool.download': 'Download enmy_colors.css',
   'tool.mode': 'Toggle light / dark',
   'tool.lang': 'Language',
+  'tool.more': 'More tools',
 
   'rows.explain': 'one row per code prefix, ordered by number; the prefixes have no official names',
 
