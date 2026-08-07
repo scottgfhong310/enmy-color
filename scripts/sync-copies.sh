@@ -3,7 +3,7 @@
 #
 # 權威版＝ GitHub/enmy-color。複製點有兩類：
 #   ① InProgress 鏡像（整包前端）
-#   ② color-palette / thangka-trace 兩支消費端（只借 lib ＋ data），各自也有 InProgress 鏡像
+#   ② color-palette / thangka-trace / color-mixer 三支消費端（只借 lib ＋ data），各自也有 InProgress 鏡像
 #
 # **回灌不是一次性的**（WORKFLOW.md Path A 的 A4）：GitHub 版是權威，
 # 之後每次改前端都要再跑一次，否則 3001 上跑的是舊版。
@@ -34,10 +34,10 @@ else
 fi
 
 echo
-echo "=== 2) lib + 資料 → color-palette / thangka-trace（含各自的 InProgress 鏡像）==="
-# 兩支消費端呼叫 nearestENMY 做「最接近的筆」。它們**不連任何 DB**，
+echo "=== 2) lib + 資料 → color-palette / thangka-trace / color-mixer（含各自的 InProgress 鏡像）==="
+# 三支消費端呼叫 nearestENMY 做「最接近的筆」。它們**不連任何 DB**，
 # 靠的就是這裡複製過去的 lib 與資料——所以每次改本 repo 的 lib／資料都要再跑一次。
-for app in color-palette thangka-trace; do
+for app in color-palette thangka-trace color-mixer; do
   for dst in "$G/$app/public/apps/$app" "$I/public/apps/$app"; do
     [ -d "$dst" ] || { echo "  MISSING $dst"; FAIL=1; continue; }
     cp "$SRC/enmy-color-lib.js"   "$dst/enmy-color-lib.js"
@@ -62,7 +62,9 @@ verify "enmy-color-lib.js" \
   "$G/thangka-trace/public/apps/thangka-trace/enmy-color-lib.js" \
   "$I/public/apps/enmy-color/enmy-color-lib.js" \
   "$I/public/apps/color-palette/enmy-color-lib.js" \
-  "$I/public/apps/thangka-trace/enmy-color-lib.js"
+  "$I/public/apps/thangka-trace/enmy-color-lib.js" \
+  "$G/color-mixer/public/apps/color-mixer/enmy-color-lib.js" \
+  "$I/public/apps/color-mixer/enmy-color-lib.js"
 
 verify "data/enmy-colors.js" \
   "$SRC/data/enmy-colors.js" \
@@ -70,7 +72,9 @@ verify "data/enmy-colors.js" \
   "$G/thangka-trace/public/apps/thangka-trace/data/enmy-colors.js" \
   "$I/public/apps/enmy-color/data/enmy-colors.js" \
   "$I/public/apps/color-palette/data/enmy-colors.js" \
-  "$I/public/apps/thangka-trace/data/enmy-colors.js"
+  "$I/public/apps/thangka-trace/data/enmy-colors.js" \
+  "$G/color-mixer/public/apps/color-mixer/data/enmy-colors.js" \
+  "$I/public/apps/color-mixer/data/enmy-colors.js"
 
 echo
 echo "=== 4) 共用件 hash（應與家族其餘複製點一致）==="

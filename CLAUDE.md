@@ -67,10 +67,10 @@ node a3-export.js --check     # 必須「全部逐位元組相同」
 | `i18n.js` | 家族 repo 根 |
 | `filter-clear.css` / `filter-clear.js` | 家族 repo（§5.12） |
 
-**本 app 是別人的上游**：`color-palette` 與 `thangka-trace` 借走 `enmy-color-lib.js`
-＋ `data/enmy-colors.js` 做 `nearestENMY`（2026-08-01 接上）。**改了 lib 或資料就要跑**
-`bash scripts/sync-copies.sh`——它同步 InProgress 鏡像與兩支消費端（含各自的鏡像），
-並以 md5 驗六份複製件是不是單一 hash。
+**本 app 是別人的上游**：`color-palette`／`thangka-trace`／`color-mixer` 借走 `enmy-color-lib.js`
+＋ `data/enmy-colors.js` 做 `nearestENMY`（前兩支 2026-08-01 接上，`color-mixer` 2026-08-07）。
+**改了 lib 或資料就要跑** `bash scripts/sync-copies.sh`——它同步 InProgress 鏡像與三支消費端
+（含各自的鏡像），並以 md5 驗**八份**複製件是不是單一 hash。
 **權威版改了、複製點沒跟上，沒有任何東西會報錯**——這支腳本就是把那件事變成看得見的。
 
 ## 為什麼長這樣
