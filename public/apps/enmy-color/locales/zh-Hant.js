@@ -14,6 +14,7 @@ I18n.register('zh-Hant', {
   'tool.nearest': '找最接近的 ENMY 色',
   'tool.css': '檢視 / 複製整份 CSS',
   'tool.download': '下載 enmy_colors.css',
+  'tool.clearFilter': '清除',
   'tool.mode': '切換 light / dark',
   'tool.lang': '語言',
   'tool.more': '更多工具',
