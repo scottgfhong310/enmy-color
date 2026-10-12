@@ -65,7 +65,7 @@ I18n.register('en', {
   'note.approx': 'Hex read from the flat fill of an official chart; only one source, not corroborated. The charts are marketing assets, not an ink specification.',
 
   'toast.copied': 'Copied',
-  'toast.copyFail': 'Copy failed (requires localhost or HTTPS)',
+  'toast.copyFail': 'Copy failed',
   'toast.pasted': 'Pasted: {v}',
   'toast.pasteFail': 'Can\'t read the clipboard (permission denied) — paste into the field with ⌘V instead',
   'toast.pasteNoColor': 'No colour found in the clipboard',

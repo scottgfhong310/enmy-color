@@ -64,7 +64,7 @@ I18n.register('ja', {
   'note.approx': 'hex は公式チャートのフラットな塗りから取得。出典は 1 枚のみで、照合はされていません。チャートは販促素材であり、インクの色指定ではありません。',
 
   'toast.copied': 'コピーしました',
-  'toast.copyFail': 'コピーに失敗（localhost または HTTPS が必要）',
+  'toast.copyFail': 'コピーに失敗しました',
   'toast.pasted': '貼り付けました：{v}',
   'toast.pasteFail': 'クリップボードを読み取れません（許可されていません）——フィールドに ⌘V で直接貼り付けてください',
   'toast.pasteNoColor': 'クリップボードに色が見つかりません',

@@ -64,7 +64,7 @@ I18n.register('zh-Hant', {
   'note.approx': 'hex 取自官方色表的平色填色，僅此一份來源、未經第二份互證；色表為行銷素材，非墨水實色規格',
 
   'toast.copied': '已複製',
-  'toast.copyFail': '複製失敗（需 localhost 或 HTTPS）',
+  'toast.copyFail': '複製失敗',
   'toast.pasted': '已貼上：{v}',
   'toast.pasteFail': '無法讀取剪貼簿（瀏覽器未授權）——可直接在欄位按 ⌘V 貼上',
   'toast.pasteNoColor': '剪貼簿裡沒有可辨識的顏色',
