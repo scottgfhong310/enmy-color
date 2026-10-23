@@ -262,6 +262,35 @@
       render(); EnmyDetail.refresh(); EnmyNearest.refresh();   // 側欄常駐、可能正開著
     });
 
+    /* 複製：先試 clipboard API，不存在或被拒絕才退回 execCommand（DESIGN_GUIDELINES「複製鈕的 clipboard 退路」）。
+       ⚠️ 非 HTTPS／非 localhost（例如 http://192.168.0.x:3001）navigator.clipboard 是 undefined——
+       直接呼叫 writeText 會丟 TypeError，畫面上什麼都不會發生（沒有 toast、也沒有複製）。
+       暫用的 textarea 設 readonly（iOS 才不會彈鍵盤），並掛在焦點所在的 modal 裡
+       （Materialize 的 modal 會把跑到它外面的焦點搶回去，掛在 body 上就選不住）。 */
+    function execCommandCopy(text) {
+      var a = document.activeElement;
+      var host = (a && a.closest && a.closest('.modal')) || document.body;
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.top = '0';
+      ta.style.left = '0';
+      ta.style.opacity = '0';
+      host.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      host.removeChild(ta);
+      return ok ? Promise.resolve() : Promise.reject(new Error('copy failed'));
+    }
+    function writeClipboard(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        return navigator.clipboard.writeText(text).catch(function () { return execCommandCopy(text); });
+      }
+      return execCommandCopy(text);
+    }
+
     var cssModal = M.Modal.init(document.getElementById('css-modal'), { preventScrolling: false });
     document.getElementById('setting-css').addEventListener('click', function () {
       var css = L.buildCss(COLORS, META);
@@ -271,8 +300,10 @@
       cssModal.open();
     });
     document.getElementById('css-copy').addEventListener('click', function () {
-      navigator.clipboard.writeText(L.buildCss(COLORS, META)).then(function () {
+      writeClipboard(L.buildCss(COLORS, META)).then(function () {
         M.toast({ html: t('toast.copied', '已複製'), displayLength: 1400 });
+      }).catch(function () {
+        M.toast({ html: t('toast.copyFail', '複製失敗'), classes: 'red' });
       });
     });
     function download() {
